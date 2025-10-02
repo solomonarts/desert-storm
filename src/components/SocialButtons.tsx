@@ -1,23 +1,25 @@
 import { motion } from "framer-motion";
-import { Twitter, MessageCircle, MessageSquare } from "lucide-react";
+// import { Twitter, MessageCircle, MessageSquare } from "lucide-react";
+
+import { FaXTwitter, FaTelegram,FaYoutube } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 
 export const SocialButtons = () => {
   const socials = [
     { 
-      icon: Twitter, 
-      label: "Twitter", 
-      url: "https://twitter.com/chabatribe",
+      icon: FaXTwitter, 
+      label: "X", 
+      url: "https://x.com/chabatribe",
       color: "hover:bg-[#1DA1F2]/20"
     },
     { 
-      icon: MessageCircle, 
+      icon: FaTelegram, 
       label: "Telegram", 
       url: "https://t.me/chabatribe",
       color: "hover:bg-[#0088cc]/20"
     },
     { 
-      icon: MessageSquare, 
+      icon: FaYoutube, 
       label: "Discord", 
       url: "https://discord.gg/chabatribe",
       color: "hover:bg-[#5865F2]/20"
