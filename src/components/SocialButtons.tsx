@@ -9,19 +9,19 @@ export const SocialButtons = () => {
     { 
       icon: FaXTwitter, 
       label: "X", 
-      url: "https://x.com/chabatribe",
+      url: "https://x.com/officialchaba",
       color: "hover:bg-[#1DA1F2]/20"
     },
     { 
       icon: FaTelegram, 
       label: "Telegram", 
-      url: "https://t.me/chabatribe",
+      url: "https://t.me",
       color: "hover:bg-[#0088cc]/20"
     },
     { 
       icon: FaYoutube, 
       label: "Discord", 
-      url: "https://discord.gg/chabatribe",
+      url: "https://www.youtube.com/",
       color: "hover:bg-[#5865F2]/20"
     },
   ];
