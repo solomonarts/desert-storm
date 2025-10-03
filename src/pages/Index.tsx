@@ -4,15 +4,18 @@ import { SocialButtons } from "@/components/SocialButtons";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { fetchBNBBalance, fetchBNBPrice } from "@/services/blockchainService";
+import { fetchBNBBalance, fetchBNBPrice, updateCumulativeDonations, getCumulativeDonations } from "@/services/blockchainService";
+import qrCodeImage from "@/assets/qrcode.jpeg";
 
 const Index = () => {
   const [bnbBalance, setBnbBalance] = useState<number>(0);
   const [bnbPrice, setBnbPrice] = useState<number>(0);
+  const [cumulativeBalance, setCumulativeBalance] = useState<number>(0);
   const [loading, setLoading] = useState(true);
 
   const bnbAddress = "0xbCaa128b29217c5ae701D11A32FF0923Fb2e273a";
   const usdValue = bnbBalance * bnbPrice;
+  const cumulativeUsdValue = cumulativeBalance * bnbPrice;
 
   const donations = [
     {
@@ -20,8 +23,11 @@ const Index = () => {
       address: bnbAddress,
       totalDonations: loading ? "Loading..." : `${bnbBalance.toFixed(4)} BNB`,
       totalDonationsUSD: loading ? "" : `≈ $${usdValue.toFixed(2)} USD`,
+      cumulativeDonations: loading ? "Loading..." : `${cumulativeBalance.toFixed(4)} BNB`,
+      cumulativeDonationsUSD: loading ? "" : `≈ $${cumulativeUsdValue.toFixed(2)} USD`,
       icon: "🔶",
       explorerUrl: `https://bscscan.com/address/${bnbAddress}`,
+      qrCodeUrl: qrCodeImage,
     },
   ];
 
@@ -34,8 +40,17 @@ const Index = () => {
       ]);
       setBnbBalance(bnbBal);
       setBnbPrice(price);
+      
+      // Update cumulative donations
+      const cumulative = updateCumulativeDonations(bnbAddress, bnbBal);
+      setCumulativeBalance(cumulative);
+      
       setLoading(false);
     };
+
+    // Initialize cumulative balance from storage
+    const initialCumulative = getCumulativeDonations(bnbAddress);
+    setCumulativeBalance(initialCumulative.total);
 
     fetchBalances();
     // Refresh balances every 30 seconds

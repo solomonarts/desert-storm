@@ -3,19 +3,21 @@ import { Copy, Check, ExternalLink } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import  qrcode from "@/assets/qrcode.jpeg"
 
 interface DonationCardProps {
   network: string;
   address: string;
   totalDonations: string;
   totalDonationsUSD: string;
+  cumulativeDonations: string;
+  cumulativeDonationsUSD: string;
   icon: string;
   explorerUrl: string;
+  qrCodeUrl?: string;
   delay?: number;
 }
 
-export const DonationCard = ({ network, address, totalDonations, totalDonationsUSD, icon, explorerUrl, delay = 0 }: DonationCardProps) => {
+export const DonationCard = ({ network, address, totalDonations, totalDonationsUSD, cumulativeDonations, cumulativeDonationsUSD, icon, explorerUrl, qrCodeUrl, delay = 0 }: DonationCardProps) => {
   const [copied, setCopied] = useState(false);
 
   const copyAddress = () => {
@@ -50,7 +52,7 @@ export const DonationCard = ({ network, address, totalDonations, totalDonationsU
         </div>
         
         <div className="mb-4 p-4 bg-muted/50 rounded-lg">
-          <p className="text-xs text-muted-foreground mb-1 font-semibold">Donation Address(Send Only BNB)</p>
+          <p className="text-xs text-muted-foreground mb-1 font-semibold">Donation Address</p>
           <div className="flex items-center gap-2">
             <p className="text-sm font-mono text-foreground/90 break-all flex-1">
               {address}
@@ -66,33 +68,22 @@ export const DonationCard = ({ network, address, totalDonations, totalDonationsU
           </div>
         </div>
 
-        <div className="mb-4 p-4 bg-muted/50 rounded-lg">
-          <p className="text-xs text-muted-foreground mb-1 font-semibold">Scan to donate</p>
-          <div className="flex items-center gap-2">
-            <img  className="h-auto w-1/2 m-auto rounded-sm" src={qrcode}  alt="Qrcode scan" />
-            {/* <p className="text-sm font-mono text-foreground/90 break-all flex-1">
-              {address}
-            </p>
-            <Button
-              onClick={copyAddress}
-              variant="ghost"
-              size="sm"
-              className="shrink-0 hover:bg-accent/20"
-            >
-              {copied ? <Check className="h-4 w-4 text-accent" /> : <Copy className="h-4 w-4" />}
-            </Button> */}
-          </div>
-        </div>
-
         <div className="pt-4 border-t border-accent/20">
-          <p className="text-sm text-muted-foreground mb-1">Total Donations</p>
-          <p className="text-3xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
-            {totalDonations}
+          <p className="text-sm text-muted-foreground mb-1">Total Donated</p>
+          <p className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            {cumulativeDonations}
           </p>
           <p className="text-lg text-muted-foreground mt-1">
-            {totalDonationsUSD}
+            {cumulativeDonationsUSD}
           </p>
         </div>
+
+        {qrCodeUrl && (
+          <div className="mt-4 pt-4 border-t border-accent/20 flex flex-col items-center">
+            <p className="text-sm text-muted-foreground mb-2">Scan to Donate</p>
+            <img src={qrCodeUrl} alt="QR Code for donations" className="w-48 h-48 rounded-lg border-2 border-accent/30" />
+          </div>
+        )}
 
         <div className="mt-4 pt-4 border-t border-accent/20">
           <p className="text-xs text-accent font-medium leading-relaxed">

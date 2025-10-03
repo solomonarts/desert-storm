@@ -1,34 +1,68 @@
 // Service to fetch live blockchain balances and prices
 
+const STORAGE_KEY = "cumulative_donations";
+
+interface CumulativeData {
+  total: number;
+  lastBalance: number;
+}
+
+export const getCumulativeDonations = (address: string): CumulativeData => {
+  const stored = localStorage.getItem(`${STORAGE_KEY}_${address}`);
+  if (stored) {
+    return JSON.parse(stored);
+  }
+  return { total: 0, lastBalance: 0 };
+};
+
+export const updateCumulativeDonations = (
+  address: string,
+  currentBalance: number
+): number => {
+  const data = getCumulativeDonations(address);
+
+  // If balance increased, add the difference to cumulative total
+  if (currentBalance > data.lastBalance) {
+    data.total += currentBalance - data.lastBalance;
+  }
+
+  // Update last known balance
+  data.lastBalance = currentBalance;
+
+  localStorage.setItem(`${STORAGE_KEY}_${address}`, JSON.stringify(data));
+  return data.total;
+};
+
 export const fetchSolanaBalance = async (address: string): Promise<number> => {
   try {
-    const response = await fetch('https://api.mainnet-beta.solana.com', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("https://api.mainnet-beta.solana.com", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        jsonrpc: '2.0',
+        jsonrpc: "2.0",
         id: 1,
-        method: 'getBalance',
-        params: [address]
-      })
+        method: "getBalance",
+        params: [address],
+      }),
     });
     const data = await response.json();
     // Convert lamports to SOL (1 SOL = 1,000,000,000 lamports)
     return data.result.value / 1000000000;
   } catch (error) {
-    console.error('Error fetching Solana balance:', error);
+    console.error("Error fetching Solana balance:", error);
     return 0;
   }
 };
 
-
 export const fetchBNBPrice = async (): Promise<number> => {
   try {
-    const response = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BNBUSDT');
+    const response = await fetch(
+      "https://api.binance.com/api/v3/ticker/price?symbol=BNBUSDT"
+    );
     const data = await response.json();
     return parseFloat(data.price);
   } catch (error) {
-    console.error('Error fetching BNB price:', error);
+    console.error("Error fetching BNB price:", error);
     return 0;
   }
 };
@@ -36,18 +70,18 @@ export const fetchBNBPrice = async (): Promise<number> => {
 export const fetchBNBBalance = async (address: string): Promise<number> => {
   try {
     // Using BSC public RPC endpoint
-    const response = await fetch('https://bsc-dataseed.binance.org/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("https://bsc-dataseed.binance.org/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        jsonrpc: '2.0',
+        jsonrpc: "2.0",
         id: 1,
-        method: 'eth_getBalance',
-        params: [address, 'latest']
-      })
+        method: "eth_getBalance",
+        params: [address, "latest"],
+      }),
     });
     const data = await response.json();
-    
+
     if (data.result) {
       // Convert hex wei to BNB (1 BNB = 1e18 wei)
       const weiBalance = parseInt(data.result, 16);
@@ -55,7 +89,7 @@ export const fetchBNBBalance = async (address: string): Promise<number> => {
     }
     return 0;
   } catch (error) {
-    console.error('Error fetching BNB balance:', error);
+    console.error("Error fetching BNB balance:", error);
     return 0;
   }
 };
