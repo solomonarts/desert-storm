@@ -3,6 +3,7 @@ import { Copy, Check, ExternalLink } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import  qrcode from "@/assets/qrcode.jpeg"
 
 interface DonationCardProps {
   network: string;
@@ -49,7 +50,7 @@ export const DonationCard = ({ network, address, totalDonations, totalDonationsU
         </div>
         
         <div className="mb-4 p-4 bg-muted/50 rounded-lg">
-          <p className="text-xs text-muted-foreground mb-1 font-semibold">Donation Address</p>
+          <p className="text-xs text-muted-foreground mb-1 font-semibold">Donation Address(Send Only BNB)</p>
           <div className="flex items-center gap-2">
             <p className="text-sm font-mono text-foreground/90 break-all flex-1">
               {address}
@@ -62,6 +63,24 @@ export const DonationCard = ({ network, address, totalDonations, totalDonationsU
             >
               {copied ? <Check className="h-4 w-4 text-accent" /> : <Copy className="h-4 w-4" />}
             </Button>
+          </div>
+        </div>
+
+        <div className="mb-4 p-4 bg-muted/50 rounded-lg">
+          <p className="text-xs text-muted-foreground mb-1 font-semibold">Scan to donate</p>
+          <div className="flex items-center gap-2">
+            <img  className="h-auto w-1/2 m-auto rounded-sm" src={qrcode}  alt="Qrcode scan" />
+            {/* <p className="text-sm font-mono text-foreground/90 break-all flex-1">
+              {address}
+            </p>
+            <Button
+              onClick={copyAddress}
+              variant="ghost"
+              size="sm"
+              className="shrink-0 hover:bg-accent/20"
+            >
+              {copied ? <Check className="h-4 w-4 text-accent" /> : <Copy className="h-4 w-4" />}
+            </Button> */}
           </div>
         </div>
 
