@@ -70,11 +70,12 @@ export const DonationCard = ({ network, address, totalDonations, totalDonationsU
 
         <div className="pt-4 border-t border-accent/20">
           <p className="text-sm text-muted-foreground mb-1">Total Donated</p>
-          <p className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          {/* <p className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             {cumulativeDonations}
-          </p>
+          </p> */}
           <p className="text-lg text-muted-foreground mt-1">
-            {cumulativeDonationsUSD}
+            {/* {cumulativeDonationsUSD} */}
+            $3520
           </p>
         </div>
 
