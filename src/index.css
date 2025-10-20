@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 222 47% 3%;
+    --foreground: 210 40% 96%;
+
+    --card: 222 47% 6%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 47% 6%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 160 84% 39%;
+    --primary-foreground: 222 47% 3%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 160 84% 39%;
+    --accent-foreground: 222 47% 3%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 160 84% 39%;
+
+    --radius: 1rem;
+
+    /* Emerald/Cyan crypto theme */
+    --emerald: 160 84% 39%;
+    --cyan: 188 94% 43%;
+    --gradient-crypto: linear-gradient(135deg, hsl(160 84% 39% / 0.2) 0%, hsl(188 94% 43% / 0.2) 100%);
+    --gradient-dark: linear-gradient(180deg, hsl(222 47% 3%) 0%, hsl(222 47% 6%) 100%);
+    --shadow-glow-emerald: 0 0 40px hsl(160 84% 39% / 0.3);
+    --shadow-glow-cyan: 0 0 40px hsl(188 94% 43% / 0.3);
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
