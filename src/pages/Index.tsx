@@ -20,7 +20,7 @@ import chaba4 from "@/assets/chaba4.jpeg";
 const X_URL = "https://x.com/officialchaba";
 const TG_URL = "https://t.me/chabaanddudukwe";
 const DONATION_WALLET = import.meta.env.VITE_WALLET_ADDRESS || "0xbCaa128b29217c5ae701D11A32FF0923Fb2e273a";
-const contractAddress = "0xccd24566775453423124354657677545342a2z"
+const contractAddress = "TBA (after Flap launch)"
 const CONTRACT = "TBA (after Flap launch)";
 const SUPPLY = "1 Billion";
 
@@ -258,7 +258,7 @@ export default function Index() {
         <section id="roadmap" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
           <h2 className="text-3xl font-bold mb-6">Roadmap</h2>
           <div className="grid lg:grid-cols-4 gap-4">
-            {[{t:"Phase 1 — Launch", i:Rocket, pts:["Flap launch","Donation wallet live","Water tank installed",">$5.5k raised"]}, {t:"Phase 2 — Sustain", i:Settings, pts:["Drill permanent water","Housing builds","Clinic setup","School + lab"]}, {t:"Phase 3 — Empower", i:Globe2, pts:["Starlink internet","AI learning (Grok)","Eco‑tourism pilots"]}, {t:"Phase 4 — Scale", i:Sparkles, pts:["NGO/Web3 partners","Governance for donors","Replicate model in Africa"]}].map((r,idx)=> (
+            {[{t:"Phase 1 — Launch", i:Rocket, pts:["Flap launch","Donation wallet live","Water tank installed",">$5.5k raised"]}, {t:"Phase 2 — Sustain", i:Settings, pts:["Drill permanent water","House Construction","Hospital setup","School + lab"]}, {t:"Phase 3 — Empower", i:Globe2, pts:["Starlink internet","AI learning (Grok)","Eco‑tourism pilots"]}, {t:"Phase 4 — Scale", i:Sparkles, pts:["NGO/Web3 partners","Governance for donors","Replicate model in Africa"]}].map((r,idx)=> (
               <Card key={idx} className="bg-white/5 border-white/10 rounded-3xl">
                 <CardHeader><CardTitle className="text-base flex items-center gap-2"><r.i className="h-4 w-4 text-primary"/> {r.t}</CardTitle></CardHeader>
                 <CardContent>
