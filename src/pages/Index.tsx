@@ -20,8 +20,8 @@ import chaba4 from "@/assets/chaba4.jpeg";
 const X_URL = "https://x.com/officialchaba";
 const TG_URL = "https://t.me/chabaanddudukwe";
 const DONATION_WALLET = import.meta.env.VITE_WALLET_ADDRESS || "0xbCaa128b29217c5ae701D11A32FF0923Fb2e273a";
-const contractAddress = "0xc643c1960113d5e4229477dfa57cf89da1f87777"
-const CONTRACT = "0xc643c1960113d5e4229477dfa57cf89da1f87777";
+const contractAddress = "0xc000000000000000000000000000000000000000"
+const CONTRACT = "0xc000000000000000000000000000000000000000";
 const SUPPLY = "1 Billion";
 
 export default function Index() {
